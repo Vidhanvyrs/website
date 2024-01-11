@@ -10,6 +10,7 @@ import HomeImage5 from "../assets/HomeImage5.png";
 import HomeImage6 from "../assets/HomeImage6.png";
 import blogimg from "../assets/blogimg.png";
 import chechmark from "../assets/CheckMark.png";
+import { useRef, useEffect } from "react";
 // import { BiLogoWhatsappSquare } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import CardCarousel from "../components/Carousel";
@@ -20,11 +21,13 @@ import botplay from "../assets/botplay.png";
 import botlogo from "../assets/botlogo.png";
 import whatsappimg from "../assets/whatsappimg.png";
 import { useState } from "react";
+import { FaLongArrowAltRight } from "react-icons/fa";
 const Home = (props) => {
   let setIsLoginClicked = props.setIsLoginClicked;
   const [isbotplay, setisbotplay] = useState(false);
   const [ischat, setischat] = useState(false);
   const [iswhatsapp, setiswhatsapp] = useState(false);
+  const [islistselected, setislistselected] = useState(false);
   const BotActiveHandler = () => {
     setisbotplay(!isbotplay);
   };
@@ -36,8 +39,50 @@ const Home = (props) => {
     setiswhatsapp(true);
     setischat(false);
   };
+  const ListHandler = () => {
+    setislistselected(!islistselected);
+  };
+  const questions = [
+    "How do I book a physiotherapy appointment?",
+    "Are there any physiotherapists in sports injuries?",
+    "What should I bring to my first appointment?",
+    "Can I receive therapy for chronic back pain?",
+    "What's the cancellation policy for appointments?",
+    "Can I reschedule my existing appointment?",
+  ];
+  const answers = [
+    "I do know and i can help u",
+    "I do know and i can help u",
+    "I do know and i can help u",
+    "I do know and i can help u",
+    "I do know and i can help u",
+    "I do know and i can help u",
+  ];
+  // const chatbotRef = useRef(null); // Create a ref for the chatbot container
+
+  // useEffect(() => {
+  //   // Create the script element
+  //   const script = document.createElement("script");
+  //   script.src = "https://www.chatbase.co/embed.min.js";
+  //   script.async = true;
+  //   script.defer = true;
+  //   script.setAttribute("chatbotId", "RZAkBsSjRWLXNyiHTSWQx");
+  //   script.setAttribute("domain", "www.chatbase.co");
+
+  //   // Append the script to the document head
+  //   document.head.appendChild(script);
+
+  //   // Cleanup function to remove script when component unmounts
+  //   return () => {
+  //     document.head.removeChild(script);
+  //   };
+  // }, []); // Empty dependency array to only run once on mount
+
+  // // ... other code
   return (
     <div className="">
+      {/* <div ref={chatbotRef} style={{ height: "700px", width: "100%" }}></div> */}
+
       <button onClick={BotActiveHandler}>
         <img
           src={botplay}
@@ -46,7 +91,7 @@ const Home = (props) => {
         />
       </button>
       {isbotplay && (
-        <div className=" border border-green-500 fixed bottom-10 right-20 z-50 w-[382px] h-[581px] flex flex-col bg-white rounded-xl shadow-lg">
+        <div className=" border border-green-500 fixed bottom-[100px] right-10 z-50 w-[300px] h-[400px] flex flex-col bg-white rounded-xl shadow-lg">
           <div className="items-center justify-between p-4 bg-green-200 rounded-t-xl">
             <div
               className="text-green-700 bg-white rounded-full float-right -mt-7 -mr-6 hover:bg-green-100 border border-green-500 font-bold hover:cursor-pointer w-[30px] h-[30px] text-center justify-center flex"
@@ -54,16 +99,16 @@ const Home = (props) => {
             >
               <span>x</span>
             </div>
-            <img src={botlogo} alt="logo" className="w-[75px] h-[21px] ml-32" />
+            <img src={botlogo} alt="logo" className="w-[75px] h-[21px] ml-24" />
             <div className="flex flex-row mt-5 ml-3 space-x-2 ">
               <button
-                className="w-[162px] h-[46px] text-green-700 text-lg font-semibold bg-white rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+                className="w-[152px] h-[36px] text-green-700 text-md font-semibold bg-white rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
                 onClick={WhatsappHandler}
               >
                 Whatsapp
               </button>
               <button
-                className="w-[162px] h-[46px] text-green-700 text-lg font-semibold bg-white rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+                className="w-[152px] h-[36px] text-green-700 text-md font-semibold bg-white rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
                 onClick={ChatHandler}
               >
                 Chat to Bot
@@ -75,7 +120,7 @@ const Home = (props) => {
               <img
                 src={whatsappimg}
                 alt="iconimg"
-                className="w-full max-w-[367px] h-auto"
+                className="w-[200px] h-[200px]"
               />
               <button className="w-full max-w-[367px] h-[46px] text-lg text-white font-semibold bg-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-50">
                 <a
@@ -90,10 +135,30 @@ const Home = (props) => {
           )}
           {ischat && !iswhatsapp && (
             <div className="">
-              <span className="w-[360px] h-[17px] font-bold text-[16px] mt-5 ml-1 text-center flex justify-center tracking-[-0.485px]">
-                Please select an inquiry to initiate the process.
+              <span className="w-[320px] h-[10px] font-bold text-[13px] mt-5 ml-1 text-center flex justify-center tracking-[-0.485px]">
+                <iframe
+                  src="https://www.chatbase.co/chatbot-iframe/RZAkBsSjRWLXNyiHTSWQx"
+                  width="94%"
+                  title="mybot"
+                  frameborder="0"
+                  className=" border border-green-500  h-[290px] -mt-6 rounded-bl-xl rounded-br-xl -ml-[30px]"
+                />
               </span>
-              {/* we will start our bot code here */}
+              {/* <ul className="mt-5 overflow-x-scroll rounded-lg h-[220px]">
+                {questions.map((question, index) => (
+                  <li key={index} className="flex justify-center mt-2 mb-2">
+                    <button
+                      className="w-[282px] h-[30px] p-2 text-center text-[10px] font-bold text-green-700 transition-colors bg-green-100 rounded-md hover:bg-green-200"
+                      onClick={ListHandler}
+                    >
+                      {islistselected && question}
+                    </button>
+                  </li>
+                ))}
+              </ul> */}
+              {/* <span>
+               
+              </span> */}
             </div>
           )}
         </div>
@@ -224,6 +289,7 @@ const Home = (props) => {
         <Slider />
       </section>
       <section className="mt-10">
+        <FaLongArrowAltRight className="ml-36" size={25} />
         <CardCarousel />
       </section>
       <section className="mt-24">

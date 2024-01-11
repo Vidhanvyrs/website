@@ -9,6 +9,8 @@ import Player from "./pages/Player+";
 import PhysioConnect from "./pages/PhysioConnect";
 import Products from "./pages/Products";
 import FooterNav from "./components/FooterNav";
+import Doctors from "./pages/Doctors";
+import DoctorProfile from "./pages/DoctorProfile";
 
 function App() {
   const [isLoginClicked, setIsLoginClicked] = useState(false);
@@ -41,6 +43,8 @@ function App() {
             <Route path="/player+" element={<Player />} />
             <Route path="/physioconnect" element={<PhysioConnect />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/doctors" element={<Doctors />} />
+            <Route path="/doctorprofile" element={<DoctorProfile />} />
           </Routes>
           <FooterNav />
         </>
